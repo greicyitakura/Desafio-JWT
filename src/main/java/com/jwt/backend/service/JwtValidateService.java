@@ -2,8 +2,6 @@ package com.jwt.backend.service;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
@@ -13,17 +11,13 @@ import com.jwt.backend.utils.Decoder;
 import com.jwt.backend.utils.PrimeNumber;
 import com.jwt.backend.utils.RoleChecker;
 import com.jwt.backend.utils.SizeCount;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
-@Component
 @Service
 public class JwtValidateService {
-
 
     public String validateJwtPayload(Object jwtToken) {
         if (jwtToken == null) {

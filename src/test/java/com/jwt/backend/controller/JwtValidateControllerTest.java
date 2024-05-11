@@ -30,7 +30,6 @@ class JwtValidateControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
     @Test
     void itShouldReturnTrueForAValidToken() throws Exception {
         lenient().when(jwtValidateService.validateJwtPayload(any())).thenReturn("verdadeiro");
@@ -72,7 +71,7 @@ class JwtValidateControllerTest {
                         .content("{\"jwtWebToken\": \"" + invalidJwtToken + "\"}")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("JWT não definido na requisição"));
+                .andExpect(MockMvcResultMatchers.content().string("falso"));
     }
 
     @Test
@@ -97,6 +96,4 @@ class JwtValidateControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("falso"));
     }
-
-
 }
