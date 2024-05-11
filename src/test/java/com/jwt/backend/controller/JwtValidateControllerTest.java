@@ -21,13 +21,10 @@ import static org.mockito.Mockito.lenient;
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
 class JwtValidateControllerTest {
-
     @Mock
     private JwtValidateService jwtValidateService;
-
     @InjectMocks
     private JwtValidateController jwtValidateController;
-
     @Autowired
     private MockMvc mockMvc;
     @Test

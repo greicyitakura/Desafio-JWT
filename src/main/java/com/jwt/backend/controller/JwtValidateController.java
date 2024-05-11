@@ -18,7 +18,6 @@ public class JwtValidateController {
         this.jwtValidateService = jwtValidateService;
     }
 
-
     @PostMapping("/jwt-validate")
     public String getJwtDecoded(@RequestBody JwtToken jwtToken) {
         try {

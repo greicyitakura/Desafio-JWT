@@ -18,7 +18,6 @@ import java.util.Map;
 
 @Service
 public class JwtValidateService {
-
     public String validateJwtPayload(Object jwtToken) {
         if (jwtToken == null) {
             throw new IllegalArgumentException("O token JWT não pode ser nulo.");
@@ -65,7 +64,7 @@ public class JwtValidateService {
         if (name == null || name.isEmpty()) {
             return false;
         }
-        boolean nameContainsDigit = new CharacterChecker().hasOnlyLettersAndSymbols(name);
+        boolean nameContainsDigit = new CharacterChecker().hasNoSpecialCaracteres(name);
         return nameContainsDigit && new SizeCount().has256Characters(name);
     }
 
@@ -83,3 +82,4 @@ public class JwtValidateService {
         return new PrimeNumber().isPrimeNumber(Integer.parseInt(seed));
     }
 }
+

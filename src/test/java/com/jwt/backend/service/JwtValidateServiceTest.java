@@ -15,32 +15,34 @@ class JwtValidateServiceTest {
     public void setUp() {
         jwtValidateService = new JwtValidateService();
     }
-
     @Test
     void itShoulTestGenerateValidJwtToken() {
         JwtTokenService jwtTokenService = new JwtTokenService();
         String jwtToken = jwtTokenService.generateJwtToken("Toninho Araujo", "Admin", "7841");
         assertTrue(jwtToken != null && !jwtToken.isEmpty());
     }
-
     @Test
     void itShouldTestInvalidToken() {
         assertThrows(IllegalArgumentException.class, () -> {
             jwtValidateService.validateJwtPayload(new Object());
         });
     }
-
     @Test
     void itshouldBeAnInstanceOfString() {
         JwtToken jwtPayloadToken = new JwtToken();
         jwtPayloadToken.setJwtWebToken("eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05sIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg");
         Assertions.assertInstanceOf(String.class, this.jwtValidateService.validateJwtPayload(jwtPayloadToken));
     }
-
     @Test
     void itShoulTestCase1() {
         String jwtToken = "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05sIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg";
         assertEquals("verdadeiro", jwtValidateService.validateJwtPayload(jwtToken));
+    }
+
+    @Test
+    void itShouldThrowExceptionForCase2() {
+        String jwtToken = "eyJhbGciOiJzI1NiJ9.dfsdfsfryJSr2xrIjoiQWRtaW4iLCJTZrkIjoiNzg0MSIsIk5hbrUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05fsdfsIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg";
+        assertEquals("falso", jwtValidateService.validateJwtPayload(jwtToken) );
     }
 
     @Test
