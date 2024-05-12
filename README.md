@@ -20,7 +20,7 @@ O desafio consistia em construir uma aplicação que exponha uma api web que rec
 
 # Como funciona o JWT
   
-![Entendimento do JWT](https://github.com/greicyitakura/desafioJWT/blob/master/jwt-fluxo.drawio.png)
+🤯[Entendimento do JWT](https://github.com/greicyitakura/Desafio-JWT/blob/master/jwt-fluxo.drawio.png)
 
 # Tecnologias utilizadas
 - Java
@@ -54,6 +54,12 @@ git clone https://github.com/greicyitakura/desafioJWT
 <h2 id="routes">📍 API Endpoints</h2>
 
 API disponível http://localhost:8080
+
+ou
+
+API disponível https://abrir.link/eMojw
+
+# Faça as requisições via Postman importando a collections
 
 <h3 id="post-auth-detail">POST /jwt-validate</h3>
 
