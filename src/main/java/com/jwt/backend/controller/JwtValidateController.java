@@ -3,6 +3,7 @@ package com.jwt.backend.controller;
 
 import com.jwt.backend.domain.JwtToken;
 import com.jwt.backend.service.JwtValidateService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,11 @@ public class JwtValidateController {
 
     public JwtValidateController(JwtValidateService jwtValidateService) {
         this.jwtValidateService = jwtValidateService;
+    }
+
+    @GetMapping
+    public String init(){
+        return "Start Challenge";
     }
 
     @PostMapping("/jwt-validate")
