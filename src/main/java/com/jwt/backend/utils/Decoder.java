@@ -9,7 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.Base64;
 
 @Component
-public class Decoder { private static final String EMPTY_PAYLOAD = "{\"Role\":\"\",\"Seed\":\"\",\"Name\":\"\"}";
+public class Decoder {
+    private static final String EMPTY_PAYLOAD = "{\"Role\":\"\",\"Seed\":\"\",\"Name\":\"\"}";
 
     public String decodePayload(String encodedData) {
         if (encodedData == null || encodedData.trim().isEmpty()) {

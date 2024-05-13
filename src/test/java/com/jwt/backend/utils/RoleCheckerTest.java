@@ -19,11 +19,13 @@ class RoleCheckerTest {
         String data = "Admin";
         assertTrue(roleChecker.isValidRole(data));
     }
+
     @Test
     void itShouldTestInvalidRole() {
         String data = "User";
         assertFalse(roleChecker.isValidRole(data));
     }
+
     @Test
     void itShouldTestBlankRole() {
         String data = "       ";

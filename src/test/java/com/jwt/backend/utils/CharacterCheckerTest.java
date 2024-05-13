@@ -8,10 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class CharacterCheckerTest {
 
     private CharacterChecker characterChecker;
+
     @BeforeEach
     void setUp() {
         characterChecker = new CharacterChecker();
     }
+
     @Test
     void itShouldTestNoSpecialCharactersValidData() {
         String data = "Lorem ipsum dolor sit amet";

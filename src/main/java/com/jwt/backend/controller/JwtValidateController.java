@@ -22,7 +22,7 @@ public class JwtValidateController {
     }
 
     @GetMapping
-    public String init(){
+    public String init() {
         return "Start Challenge";
     }
 

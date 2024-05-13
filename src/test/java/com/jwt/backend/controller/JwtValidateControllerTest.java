@@ -27,6 +27,7 @@ class JwtValidateControllerTest {
     private JwtValidateController jwtValidateController;
     @Autowired
     private MockMvc mockMvc;
+
     @Test
     void itShouldReturnTrueForAValidToken() throws Exception {
         lenient().when(jwtValidateService.validateJwtPayload(any())).thenReturn("verdadeiro");

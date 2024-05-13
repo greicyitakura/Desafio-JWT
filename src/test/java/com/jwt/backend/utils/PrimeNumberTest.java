@@ -31,5 +31,4 @@ class PrimeNumberTest {
         int zero = 0;
         assertFalse(primeNumber.isPrimeNumber(zero));
     }
-
 }

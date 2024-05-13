@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DecoderTest {
 
     private Decoder decoder;
+
     @BeforeEach
     void setUp() {
         decoder = new Decoder();
