@@ -17,8 +17,12 @@ O desafio consistia em construir uma aplicação que exponha uma api web que rec
 - A claim Seed deve ser um número primo.
 - O tamanho máximo da claim Name é de 256 caracteres.
 
+O desafio tem como objetivo final fornecer um serviço que receba tokens JWT como entrada e valide se estão de acordo com um conjunto específico de regras de segurança, como a presença de claims obrigatórias e a verificação de determinadas condições nas claims. Isso é fundamental para garantir a integridade e a segurança das comunicações entre clientes e servidores em um ambiente distribuído.
 
 # Como funciona o JWT
+
+O JWT (JSON Web Token) é um padrão aberto (RFC 7519) que define uma maneira compacta e autônoma de transmitir informações de forma segura entre partes como um objeto JSON. Ele é frequentemente usado para autenticação e autorização em aplicativos da web e APIs RESTful devido à sua capacidade de transmitir informações de forma segura entre diferentes sistemas.
+JWT desempenha um papel crucial na autenticação e autorização de APIs, fornecendo um método seguro e eficiente para validar a identidade de um usuário e conceder acesso a recursos protegidos. Ao gerar tokens assinados digitalmente, as aplicações podem verificar a autenticidade e integridade dos dados transmitidos, garantindo que apenas usuários autorizados possam acessar os serviços protegidos.
   
 🤯[Entendimento do JWT](https://github.com/greicyitakura/Desafio-JWT/blob/master/jwt-fluxo.drawio.png)
 
@@ -46,6 +50,9 @@ Utilizar uma IDE com compatível com Java
 ```bash
 # Para clonar o repositório
 git clone https://github.com/greicyitakura/desafioJWT
+
+# Para instalar as dependências usando Maven
+mvn install
 
 # Para executar o projeto
 ./mvnw spring-boot:run
