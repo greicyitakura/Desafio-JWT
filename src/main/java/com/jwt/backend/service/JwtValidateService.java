@@ -11,6 +11,8 @@ import com.jwt.backend.utils.Decoder;
 import com.jwt.backend.utils.PrimeNumber;
 import com.jwt.backend.utils.RoleChecker;
 import com.jwt.backend.utils.SizeCount;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -18,8 +20,12 @@ import java.util.Map;
 
 @Service
 public class JwtValidateService {
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtValidateService.class);
+
     public String validateJwtPayload(Object jwtToken) {
         if (jwtToken == null) {
+            logger.error("O token JWT não pode ser nulo.");
             throw new IllegalArgumentException("O token JWT não pode ser nulo.");
         }
 
@@ -29,19 +35,25 @@ public class JwtValidateService {
         } else if (jwtToken instanceof String) {
             decodedToken = new Decoder().decodePayload((String) jwtToken);
         } else {
+            logger.error("O payload do JWT deve ser uma String.");
             throw new IllegalArgumentException("O payload do JWT deve ser uma String.");
         }
 
         if (!isJsonString(decodedToken)) {
+            logger.error("Token JWT inválido: {}", decodedToken);
             throw new IllegalArgumentException("Token JWT inválido.");
         }
 
         Map<String, String> decodedMap = decodeToMap(decodedToken);
 
-        return decodedMap.size() <= 3 &&
+        boolean validationResult = decodedMap.size() <= 3 &&
                 validateRole(decodedMap.get("Role")) &&
                 validateSeed(decodedMap.get("Seed")) &&
-                validateName(decodedMap.get("Name")) ? "verdadeiro" : "falso";
+                validateName(decodedMap.get("Name"));
+
+        logger.info("Resultado da validação do JWT: {}", validationResult);
+
+        return validationResult ? "verdadeiro" : "falso";
     }
 
     private boolean isJsonString(String jsonString) {

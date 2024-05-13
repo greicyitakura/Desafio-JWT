@@ -3,6 +3,8 @@ package com.jwt.backend.controller;
 
 import com.jwt.backend.domain.JwtToken;
 import com.jwt.backend.service.JwtValidateService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,33 +27,32 @@ public class JwtValidateController {
     }
 
     @PostMapping("/jwt-validate")
-    public String getJwtDecoded(@RequestBody JwtToken jwtToken) {
-        try {
-            if (jwtToken != null) {
-                String decodedToken = this.jwtValidateService.validateJwtPayload(jwtToken);
-                return decodedToken;
-            }
-        } catch (IndexOutOfBoundsException ex) {
-
-            return "Token inválido ou inexistente";
-        } catch (RuntimeException ex) {
-
-            return "JWT não definido na requisição";
+    public ResponseEntity<String> getJwtDecoded(@RequestBody JwtToken jwtToken) {
+        if (jwtToken == null || jwtToken.getJwtWebToken() == null || jwtToken.getJwtWebToken().isEmpty()) {
+            return ResponseEntity.badRequest().body("Token inválido ou inexistente");
         }
-        return "Token inválido ou inexistente";
+
+        String decodedToken = this.jwtValidateService.validateJwtPayload(jwtToken);
+
+        if (decodedToken != null) {
+            return ResponseEntity.ok(decodedToken);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao validar o Token");
+        }
     }
 
     @PostMapping("/jwt-validate/{jwtPayloadToken}")
-    public String getJwtDecoded(@PathVariable("jwtPayloadToken") String jwtPayloadToken) {
-        try {
-            if (jwtPayloadToken != null && !jwtPayloadToken.isEmpty()) {
-                String decodedToken = this.jwtValidateService.validateJwtPayload(jwtPayloadToken);
-                return decodedToken;
-            } else {
-                return "JWT não definido na requisição";
-            }
-        } catch (RuntimeException ex) {
-            return "Erro ao validar o Token";
+    public ResponseEntity<String> getJwtDecoded(@PathVariable("jwtPayloadToken") String jwtPayloadToken) {
+        if (jwtPayloadToken == null || jwtPayloadToken.isEmpty()) {
+            return ResponseEntity.badRequest().body("Token inválido ou inexistente");
+        }
+
+        String decodedToken = this.jwtValidateService.validateJwtPayload(jwtPayloadToken);
+
+        if (decodedToken != null) {
+            return ResponseEntity.ok(decodedToken);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao validar o Token");
         }
     }
 }
