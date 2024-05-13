@@ -79,7 +79,7 @@ docker stop <nome_do_contêiner>
 ```
 
 
-# Faça as requisições via Postman importando a collections
+# Faça as requisições via Postman importando as collections
 
 <h3 id="post-auth-detail">POST /jwt-validate</h3>
 
