@@ -33,7 +33,7 @@ JWT desempenha um papel crucial na autenticação e autorização de APIs, forne
 
 # Estrutura do Projeto
 
-- Domain: Contém as classes de domínio do projeto
+- Domain: Contém a classe de domínio do projeto
 - Service: Implementa a lógica de criação e validação do JWT
 - Controller: Responsável pelas chamadas da API
 - Utils: Implementa a validação de cada regra do desafio
@@ -44,12 +44,17 @@ Pré-requisitos:
 
 Java 17
 
+Docker
+
 Utilizar uma IDE com compatível com Java
 
+<h2 id="routes">📍 API Endpoints</h2>
+
+API disponível http://localhost:8080
 
 ```bash
 # Para clonar o repositório
-git clone https://github.com/greicyitakura/desafioJWT
+git clone https://github.com/greicyitakura/Desafio-JWT.git
 
 # Para instalar as dependências usando Maven
 mvn install
@@ -58,13 +63,21 @@ mvn install
 ./mvnw spring-boot:run
 ```
 
-<h2 id="routes">📍 API Endpoints</h2>
+ ou
 
-API disponível http://localhost:8080
+ API disponível http://52.90.142.252/api/v1
 
-ou
+```bash
+#Construir a imagem Docker
+docker build -t <nome_da_imagem> .
 
-API disponível https://abrir.link/eMojw
+# Executar o contêiner Docker
+docker run -d -p <porta_do_host>:<porta_do_container> --name <nome_do_contêiner> <nome_da_imagem>
+
+# Parar o contêiner Docker
+docker stop <nome_do_contêiner>
+```
+
 
 # Faça as requisições via Postman importando a collections
 
