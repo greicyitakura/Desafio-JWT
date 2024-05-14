@@ -3,7 +3,6 @@ package com.jwt.backend.utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
@@ -35,10 +34,17 @@ public class Decoder {
         }
 
         try {
-            new JSONObject(payload);
-            return true;
+            JSONObject jsonObject = new JSONObject(payload);
+
+            return jsonObject.keySet().stream()
+                    .map(key -> jsonObject.getString(key))
+                    .allMatch(value -> isValidLength(value));
         } catch (JSONException e) {
             return false;
         }
+    }
+
+    private boolean isValidLength(String value) {
+        return value != null && value.length() <= 256;
     }
 }
