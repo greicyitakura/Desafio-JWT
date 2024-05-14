@@ -22,6 +22,11 @@ import java.util.Map;
 public class JwtValidateService {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtValidateService.class);
+    private final RoleChecker roleChecker;
+
+    public JwtValidateService(RoleChecker roleChecker) {
+        this.roleChecker = roleChecker;
+    }
 
     public String validateJwtPayload(Object jwtToken) {
         if (jwtToken == null) {
@@ -80,11 +85,9 @@ public class JwtValidateService {
         return nameContainsDigit && new SizeCount().has256Characters(name);
     }
 
-    private boolean validateRole(String role) {
-        if (role == null || role.isEmpty()) {
-            return false;
-        }
-        return new RoleChecker().isValidRole(role);
+    public boolean validateRole(String role) {
+        RoleChecker.Role roleEnum = RoleChecker.Role.valueOf(role.toUpperCase());
+        return roleChecker.isValidRole(roleEnum);
     }
 
     private boolean validateSeed(String seed) {
